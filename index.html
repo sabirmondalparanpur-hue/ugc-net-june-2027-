@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1d35">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>UGC NET — June 2027 Study Planner</title>
+<style>
+:root{--navy:#0b1d35;--navy2:#12345a;--blue:#2476f2;--pink:#fce7ef;--pinkink:#ad2452;--green:#e0f8e9;--greenink:#087443;--bg:#f3f6fb;--ink:#16253e;--muted:#68758b;--line:#e1e8f1;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif}
+header{background:linear-gradient(130deg,var(--navy),#174778);color:white;padding:24px 18px 28px;border-radius:0 0 26px 26px}
+.wrap{max-width:1050px;margin:auto} .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-size:23px;font-weight:850;letter-spacing:.2px}.brand span{color:#ffd34e}.sub{color:#d4e3f8;font-size:13px;margin-top:3px}
+.pill{border:1px solid #ffffff55;border-radius:99px;padding:7px 11px;font-size:12px;white-space:nowrap}
+.countdown{background:linear-gradient(100deg,#e9f5ff,#fff);color:var(--navy);border-radius:18px;margin-top:20px;padding:17px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.count-label{font-size:12px;font-weight:800;letter-spacing:1px;color:#506783}.days{font-size:46px;font-weight:900;line-height:1.05}.target{font-size:13px;color:#506783;margin-top:6px}.mountain{font-size:42px}
+main{max-width:1050px;margin:-7px auto 30px;padding:0 14px}.nav{display:flex;gap:7px;overflow:auto;background:white;padding:7px;border-radius:14px;box-shadow:0 5px 18px #0b1d3510;position:sticky;top:0;z-index:5}
+.nav button{flex:1;min-width:max-content;border:0;background:transparent;border-radius:10px;padding:11px 13px;color:#52627a;font-weight:750;cursor:pointer}.nav button.active{background:var(--navy2);color:white}
+section.view{display:none;padding-top:17px}section.view.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:0 4px 15px #14284908}.card h2,.card h3{margin:0 0 9px}.card h2{font-size:18px}.card h3{font-size:15px}.muted{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.stat{background:#ffffff18;border:1px solid #ffffff25;border-radius:12px;padding:10px}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:#d4e3f8}
+.subject{display:flex;gap:12px;align-items:flex-start}.subject .ico{font-size:25px}.subject.paper1{background:linear-gradient(130deg,#fff,#fff1f6)}.subject.geo{background:linear-gradient(130deg,#fff,#effff4)}.bar{height:8px;background:#e4eaf3;border-radius:99px;overflow:hidden;margin:12px 0 7px}.bar i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .2s}.subject.paper1 .bar i{background:#dc4779}.subject.geo .bar i{background:#14a66a}
+.month{margin:13px 0}.month-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.month-head h2{margin:0;font-size:19px}.month-head .date{font-size:12px;color:var(--muted)}.month-body{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.unit{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff}.unit.p1{border-top:4px solid #e45c8b}.unit.geo{border-top:4px solid #20a76b}.unit-title{font-weight:800;margin-bottom:5px}.unit small{display:block;color:var(--muted);margin-top:4px}.unit .mini{font-size:12px;color:#5c6980}.unit input{accent-color:var(--blue)}
+.task{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid #eef2f7;font-size:13px}.task:last-child{border:0}.task input{margin-top:3px;accent-color:#1d9a66;width:17px;height:17px}.task.done span{text-decoration:line-through;color:#7d8a9e}
+button.primary{border:0;background:var(--blue);color:white;border-radius:11px;padding:11px 14px;font-weight:800;cursor:pointer}button.secondary{border:1px solid var(--line);background:white;border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer;color:var(--ink)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.toolbar select,.toolbar input{border:1px solid var(--line);background:white;padding:10px;border-radius:10px;color:var(--ink)}
+.week{background:#fff;border:1px solid var(--line);border-radius:15px;margin:10px 0;overflow:hidden}.week summary{padding:14px;font-weight:800;cursor:pointer;background:#f9fbff}.weekgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}.weekcol{padding:12px;border-radius:12px}.weekcol.p1{background:var(--pink)}.weekcol.geo{background:var(--green)}.weekcol h4{margin:0 0 7px;font-size:14px}.weekcol .task{border-color:#ffffff90}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:10px;text-align:left;border-bottom:1px solid var(--line)}th{background:#f7f9fd}
+.progress-wrap{margin:10px 0 18px}.progress-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:6px}.empty{padding:18px;text-align:center;color:var(--muted)}
+.notice{background:#fff8e7;border:1px solid #f4dfa1;padding:13px;border-radius:13px;font-size:13px;line-height:1.5}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 25px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.month-body,.weekgrid{grid-template-columns:1fr}.countdown{align-items:flex-start}.days{font-size:40px}.mountain{font-size:30px}.nav button{padding:10px 12px}.stats{gap:6px}.stat b{font-size:17px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><div><div class="brand">🎓 UGC <span>NET</span></div><div class="sub">JUNE 2027 · YOUR STUDY COMMAND CENTRE</div></div><div class="pill">Target: 31 May 2027</div></div>
+  <div class="countdown"><div><div class="count-label">DAYS REMAINING</div><div class="days" id="days">—</div><div class="target" id="dateLine">17 Oct 2026 → 31 May 2027</div></div><div class="mountain">🏔️</div></div>
+  <div class="stats"><div class="stat"><b id="overallPct">0%</b><span>Overall progress</span></div><div class="stat"><b id="tasksDone">0</b><span>Tasks completed</span></div><div class="stat"><b id="testsDone">0</b><span>Tests recorded</span></div></div>
+</div></header>
+<main>
+<div class="nav" role="tablist">
+<button class="active" data-tab="home">🏠 Home</button><button data-tab="plan">🗓 Study Plan</button><button data-tab="daily">☑ Today’s Tasks</button><button data-tab="tests">📝 Tests</button><button data-tab="progress">📊 Progress</button>
+</div>
+<section id="home" class="view active">
+  <div class="grid">
+    <div class="card subject paper1"><div class="subject"><div class="ico">📘</div><div><h2>Paper 1 · General</h2><div class="muted">10 units · 25 days per unit (your rule)</div></div></div><div class="bar"><i id="p1bar"></i></div><div class="progress-row"><span id="p1done">0 / 10 units completed</span><b id="p1pct">0%</b></div><button class="primary" onclick="showTab('plan')">Open Paper 1 plan →</button></div>
+    <div class="card subject geo"><div class="subject"><div class="ico">🌍</div><div><h2>Paper 2 · Geography</h2><div class="muted">11 units · 20 days per unit (your rule)</div></div></div><div class="bar"><i id="geobar"></i></div><div class="progress-row"><span id="geodone">0 / 11 units completed</span><b id="geopct">0%</b></div><button class="primary" onclick="showTab('plan')">Open Geography plan →</button></div>
+  </div>
+  <div class="card" style="margin-top:13px"><div class="month-head"><h2>📌 Current plan</h2><span class="date">17 Oct 2026 – 31 May 2027</span></div><p class="muted">দুটি Paper একই দিনে শুরু হবে। প্রতিটি Unit-এর দিনসংখ্যা তোমার নির্দেশ অনুযায়ী থাকবে। কাজ শেষ হলে checkbox-এ টিক দাও—অগ্রগতি এই ব্রাউজারে সেভ হবে।</p><button class="primary" onclick="showTab('daily')">আজকের কাজ দেখো →</button></div>
+  <div class="notice" style="margin-top:13px"><b>সময়সীমার গুরুত্বপূর্ণ হিসাব:</b> ১০টি Paper 1 Unit × ২৫ দিন = ২৫০ দিন; Geography-তে ১১টি Unit × ২০ দিন = ২২০ দিন। এগুলি একসঙ্গে চললেও ৩১ মে ২০২৭-এর মধ্যে প্রতিটি Unit-এর সম্পূর্ণ নির্ধারিত দিন দেওয়া সম্ভব নয়। তাই এই অ্যাপ তোমার নির্ধারিত সময় ও target date—দুটিই দেখাবে; নীরবে সময় কমাবে না।</div>
+</section>
+<section id="plan" class="view">
+  <div class="card"><h2>🗓 Combined Study Plan</h2><div class="muted">দুটি বিষয়ের একই start date · unit duration আলাদা</div>
+    <div class="toolbar"><label for="filter">দেখাও:</label><select id="filter"><option value="both">Paper 1 + Geography</option><option value="p1">শুধু Paper 1</option><option value="geo">শুধু Geography</option></select><label for="monthFilter">মাস:</label><select id="monthFilter"><option value="all">সব মাস</option></select></div>
+    <div id="monthPlan"></div>
+  </div>
+</section>
+<section id="daily" class="view">
+  <div class="card"><h2>☑ Daily Study Checklist</h2><div class="muted">তারিখ বেছে নিয়ে দুই বিষয়ের কাজ চেক করো। কাজের তালিকা তোমার uploaded road map-এর study routine অনুসারে সাজানো।</div>
+  <div class="toolbar"><label for="dayDate">তারিখ:</label><input id="dayDate" type="date" value="2026-10-17"><button class="secondary" id="todayBtn">Plan start date</button></div>
+  <div class="grid"><div class="card subject paper1"><h3>📘 Paper 1</h3><div id="p1TodayTitle" class="muted">Teaching Aptitude</div><div id="p1Tasks"></div></div><div class="card subject geo"><h3>🌍 Geography</h3><div id="geoTodayTitle" class="muted">Geomorphology</div><div id="geoTasks"></div></div></div>
+  </div>
+</section>
+<section id="tests" class="view">
+  <div class="card"><h2>📝 Test Tracker</h2><p class="muted">Mock/sectional test দেওয়ার পর score লিখে Add Test চাপো।</p>
+  <form id="testForm" class="toolbar"><input id="testName" required placeholder="Test name (e.g. Teaching Aptitude)"><select id="testPaper"><option>Paper 1</option><option>Geography</option><option>Combined Mock</option></select><input id="testScore" type="number" min="0" max="100" required placeholder="Score %"><input id="testDate" type="date" value="2026-10-17" required><button class="primary">Add Test</button></form>
+  <div id="testTable"></div></div>
+</section>
+<section id="progress" class="view">
+  <div class="grid"><div class="card"><h2>📘 Paper 1 progress</h2><div class="bar"><i id="p1bar2"></i></div><div id="p1progressText" class="muted">0 of 10 units completed</div></div><div class="card"><h2>🌍 Geography progress</h2><div class="bar"><i id="geobar2"></i></div><div id="geoprogressText" class="muted">0 of 11 units completed</div></div></div>
+  <div class="card" style="margin-top:13px"><h2>📅 Monthly review</h2><div id="monthlyReview"></div></div>
+  <div class="card" style="margin-top:13px"><h2>💾 Your data</h2><p class="muted">চেকলিস্ট ও test record এই browser/device-এ থাকে। অন্য device-এ নিতে Export JSON করে রাখো।</p><div class="toolbar"><button class="primary" id="exportBtn">Export backup</button><label class="secondary" for="importFile">Import backup</label><input id="importFile" type="file" accept=".json,application/json" style="display:none"><button class="secondary" id="resetBtn">Reset all data</button></div></div>
+</section>
+<footer>UGC NET — June 2027 · Personal study tracker · Progress saves in this browser</footer>
+</main>
+<script>
+const START='2026-10-17', TARGET='2027-05-31';
+const p1=['Teaching Aptitude','Research Aptitude','Comprehension','Communication','Mathematical Reasoning and Aptitude','Logical Reasoning','Data Interpretation','ICT','People, Development and Environment','Higher Education System'];
+const geo=['Geomorphology','Climatology','Oceanography','Geography of Environment','Population and Settlement Geography','Economic Activities and Regional Development','Cultural and Social Geography','Political Geography','Geographic Thought','Geographical Techniques','Geography of India'];
+const tasks1=['Watch recorded lecture','Make / revise notes','Solve topic-wise PYQs (10–15)','Revise key points','Take mini/sectional test'];
+const tasksg=['Watch recorded lecture','Make / revise notes','Solve topic-wise PYQs (10–15)','Revise diagrams, maps & one-liners','Take mini/sectional test'];
+const KEY='ugcnetJune2027TrackerV1';
+let state={checks:{},tests:[],completed:{p1:[],geo:[]}};
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');state={...state,...x};}catch(e){}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
+function dateAt(offset){let d=new Date(START+'T12:00:00');d.setDate(d.getDate()+offset);return d}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmt(d){return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}
+function diff(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/86400000)}
+function unitFor(arr,duration,date){let off=diff(START,date);if(off<0)return {idx:0,day:0};let idx=Math.floor(off/duration);return {idx:Math.min(idx,arr.length-1),day:off%duration+1,over:idx>=arr.length}}
+function unitRange(i,duration){let s=dateAt(i*duration),e=dateAt((i+1)*duration-1);return {s,e}}
+function allTasks(){return [...tasks1,...tasksg]}
+function renderCountdown(){let today=iso(new Date());let n=diff(today,TARGET);document.getElementById('days').textContent=n>=0?n:0;document.getElementById('dateLine').textContent=fmt(new Date(START+'T12:00:00'))+' → '+fmt(new Date(TARGET+'T12:00:00'))}
+function unitCard(name,i,duration,type){let r=unitRange(i,duration),id=type+'-'+i,done=(state.completed[type]||[]).includes(i);return `<div class="unit ${type==='p1'?'p1':'geo'}"><label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" ${done?'checked':''} onchange="toggleUnit('${type}',${i},this.checked)" aria-label="Mark ${name} complete"><div><div class="unit-title">${name}</div><div class="mini">${fmt(r.s)} – ${fmt(r.e)}</div><small>${duration} days · ${done?'Completed':'Not completed'}</small></div></label></div>`}
+function renderPlan(){let f=document.getElementById('filter').value,m=document.getElementById('monthFilter').value;let html='';let months={};for(let i=0;i<7;i++){let d=new Date(2026,9+i,1);months[iso(d).slice(0,7)]=d.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}let select=document.getElementById('monthFilter');if(select.options.length===1){Object.entries(months).forEach(([v,l])=>select.add(new Option(l,v)))}
+for(let [key,label] of Object.entries(months)){if(m!=='all'&&m!==key)continue;let p1html='',geohtml='';p1.forEach((n,i)=>{let r=unitRange(i,25);if(iso(r.s).slice(0,7)===key||iso(r.e).slice(0,7)===key)p1html+=unitCard(n,i,25,'p1')});geo.forEach((n,i)=>{let r=unitRange(i,20);if(iso(r.s).slice(0,7)===key||iso(r.e).slice(0,7)===key)geohtml+=unitCard(n,i,20,'geo')});if((f==='p1'&&!p1html)||(f==='geo'&&!geohtml)||(f==='both'&&!p1html&&!geohtml))continue;html+=`<div class="month"><div class="month-head"><h2>${label}</h2><span class="date">Month view</span></div><div class="month-body">${f!=='geo'?`<div><div class="muted" style="margin:4px 0 8px">📘 PAPER 1</div>${p1html||'<div class="empty">এই মাসে নতুন Unit নেই</div>'}</div>`:''}${f!=='p1'?`<div><div class="muted" style="margin:4px 0 8px">🌍 GEOGRAPHY</div>${geohtml||'<div class="empty">এই মাসে নতুন Unit নেই</div>'}</div>`:''}</div></div>`}
+document.getElementById('monthPlan').innerHTML=html||'<div class="empty">কোনও Unit নেই</div>'}
+function checkKey(date,type,task){return date+'|'+type+'|'+task}
+function renderDaily(){let date=document.getElementById('dayDate').value||START;let a=unitFor(p1,25,date),b=unitFor(geo,20,date);document.getElementById('p1TodayTitle').textContent=(a.idx<p1.length?p1[a.idx]:'All units mapped')+` · Day ${a.day}/25`;document.getElementById('geoTodayTitle').textContent=(b.idx<geo.length?geo[b.idx]:'All units mapped')+` · Day ${b.day}/20`;
+function tasksHTML(arr,type){return arr.map((t,i)=>{let k=checkKey(date,type,i),done=!!state.checks[k];return `<label class="task ${done?'done':''}"><input type="checkbox" ${done?'checked':''} onchange="toggleTask('${date}','${type}',${i},this.checked)"><span>${t}</span></label>`}).join('')}
+document.getElementById('p1Tasks').innerHTML=tasksHTML(tasks1,'p1');document.getElementById('geoTasks').innerHTML=tasksHTML(tasksg,'geo')}
+function toggleTask(d,t,i,v){state.checks[checkKey(d,t,i)]=v;save()}
+function toggleUnit(t,i,v){state.completed[t]=state.completed[t]||[];state.completed[t]=v?[...new Set([...state.completed[t],i])]:state.completed[t].filter(x=>x!==i);save()}
+function renderTests(){let el=document.getElementById('testTable');if(!state.tests.length){el.innerHTML='<div class="empty">এখনও কোনও test record নেই। Test দেওয়ার পর উপরে যোগ করো।</div>';return}el.innerHTML='<table><thead><tr><th>Date</th><th>Test</th><th>Paper</th><th>Score</th><th></th></tr></thead><tbody>'+state.tests.slice().reverse().map((t,i)=>`<tr><td>${t.date}</td><td>${esc(t.name)}</td><td>${esc(t.paper)}</td><td><b>${t.score}%</b></td><td><button class="secondary" onclick="deleteTest(${state.tests.length-1-i})">Delete</button></td></tr>`).join('')+'</tbody></table>'}
+function deleteTest(i){state.tests.splice(i,1);save()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderProgress(){let done1=(state.completed.p1||[]).length,doneg=(state.completed.geo||[]).length;let checks=Object.values(state.checks).filter(Boolean).length,total=Object.keys(state.checks).length;let pct=total?Math.round(checks/total*100):0;document.getElementById('p1bar').style.width=(done1/10*100)+'%';document.getElementById('geobar').style.width=(doneg/11*100)+'%';document.getElementById('p1bar2').style.width=(done1/10*100)+'%';document.getElementById('geobar2').style.width=(doneg/11*100)+'%';document.getElementById('p1done').textContent=`${done1} / 10 units completed`;document.getElementById('geodone').textContent=`${doneg} / 11 units completed`;document.getElementById('p1pct').textContent=Math.round(done1/10*100)+'%';document.getElementById('geopct').textContent=Math.round(doneg/11*100)+'%';document.getElementById('p1progressText').textContent=`${done1} of 10 units marked completed`;document.getElementById('geoprogressText').textContent=`${doneg} of 11 units marked completed`;document.getElementById('overallPct').textContent=Math.round((done1+doneg)/21*100)+'%';document.getElementById('tasksDone').textContent=checks;document.getElementById('testsDone').textContent=state.tests.length;
+let months={};for(let i=0;i<8;i++){let d=new Date(2026,9+i,1),k=iso(d).slice(0,7);months[k]=d.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}document.getElementById('monthlyReview').innerHTML=Object.entries(months).map(([k,l])=>{let count=Object.entries(state.checks).filter(([key,v])=>key.startsWith(k)&&v).length;let tests=state.tests.filter(t=>t.date.startsWith(k)).length;return `<div class="progress-wrap"><div class="progress-row"><b>${l}</b><span>${count} tasks · ${tests} tests</span></div><div class="bar"><i style="width:${Math.min(count/40*100,100)}%;background:#1d9a66"></i></div></div>`}).join('')}
+function renderAll(){renderCountdown();renderPlan();renderDaily();renderTests();renderProgress()}
+function showTab(id){document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.getElementById('filter').addEventListener('change',renderPlan);document.getElementById('monthFilter').addEventListener('change',renderPlan);document.getElementById('dayDate').addEventListener('change',renderDaily);document.getElementById('todayBtn').addEventListener('click',()=>{document.getElementById('dayDate').value=START;renderDaily()});
+document.getElementById('testForm').addEventListener('submit',e=>{e.preventDefault();state.tests.push({name:document.getElementById('testName').value,paper:document.getElementById('testPaper').value,score:Number(document.getElementById('testScore').value),date:document.getElementById('testDate').value});e.target.reset();document.getElementById('testDate').value=START;save()});
+document.getElementById('exportBtn').addEventListener('click',()=>{let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ugc-net-june-2027-backup.json';a.click();URL.revokeObjectURL(a.href)});
+document.getElementById('importFile').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();alert('Backup imported.')}catch(err){alert('Invalid backup file.')}};r.readAsText(f)});
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('সব checklist, unit completion এবং test record মুছে যাবে। নিশ্চিত?')){state={checks:{},tests:[],completed:{p1:[],geo:[]}};save()}});
+load();renderAll();
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
